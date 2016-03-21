@@ -1,8 +1,9 @@
-//!实现了两个Matrix：
+//! 实现了两个Matrix：
 //!
-//!Vec<Vec<f64>> 返回皆为值 ，符合trait Matrix
+//! Vec<Vec<f64>> 返回皆为值 ，符合trait Matrix
 //!
-//!VecMatrix 返回皆为引用，无法符合trait，因为Iter无法用trait的associate type 表示  
+//! VecMatrix 返回皆为引用，符合trait Matrix
+//! VecMatrix 函数返回的SubMatrix为一个引用的Matrix
 //! 
 
 use std::ops::{ Add, Sub, Range, Index };
