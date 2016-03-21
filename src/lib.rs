@@ -8,6 +8,7 @@
 
 use std::ops::{ Add, Sub, Range, Index };
 
+///线性空间
 pub trait LinearSpace {
     fn add(&self, rhs: &Self) -> Self;
     fn sub(&self, rhs: &Self) -> Self;
