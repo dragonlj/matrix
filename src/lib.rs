@@ -51,41 +51,41 @@ pub trait MatrixMut<'a, T: Add<T> + Sub<T>>: Matrix<'a, T> {
     fn set_sub_matrix(&'a mut self, row: Range<usize>, col: Range<usize>, m: &Self);
 }
 
-pub struct RowIterator<'a> {
-    v: &'a Vec<Vec<f64>>,
-    row: usize,
-} 
-
-impl<'a> Iterator for RowIterator<'a> {
-    type Item = Vec<f64>;
-    fn next(&mut self) -> Option<Self::Item> {
-        let v = self.v[self.row].clone();
-        self.row = self.row + 1;
-        if self.row <= self.v.len() {
-            Some(v)
-        } else {
-            None
-        }
-    }
-}
-
-pub struct ColIterator<'a> {
-    v: &'a Vec<Vec<f64>>,
-    col: usize,
-} 
-
-impl<'a> Iterator for ColIterator<'a> {
-    type Item = Vec<f64>;
-    fn next(&mut self) -> Option<Self::Item> {
-        let v = self.v.iter().map(|x| x[self.col]).collect::<Vec<f64>>();
-        self.col = self.col + 1;
-        if self.col <= self.v[0].len() {
-            Some(v)
-        } else {
-            None
-        }
-    }
-}
+//pub struct RowIterator<'a> {
+//    v: &'a Vec<Vec<f64>>,
+//    row: usize,
+//} 
+// 
+//impl<'a> Iterator for RowIterator<'a> {
+//    type Item = Vec<f64>;
+//    fn next(&mut self) -> Option<Self::Item> {
+//        let v = self.v[self.row].clone();
+//        self.row = self.row + 1;
+//        if self.row <= self.v.len() {
+//            Some(v)
+//        } else {
+//            None
+//        }
+//    }
+//}
+// 
+//pub struct ColIterator<'a> {
+//    v: &'a Vec<Vec<f64>>,
+//    col: usize,
+//} 
+// 
+//impl<'a> Iterator for ColIterator<'a> {
+//    type Item = Vec<f64>;
+//    fn next(&mut self) -> Option<Self::Item> {
+//        let v = self.v.iter().map(|x| x[self.col]).collect::<Vec<f64>>();
+//        self.col = self.col + 1;
+//        if self.col <= self.v[0].len() {
+//            Some(v)
+//        } else {
+//            None
+//        }
+//    }
+//}
 
 //impl<'a> Matrix<'a, f64> for Vec<Vec<f64>> {
 //    type RowVector = Vec<f64>;
