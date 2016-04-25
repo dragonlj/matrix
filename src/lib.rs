@@ -87,91 +87,91 @@ impl<'a> Iterator for ColIterator<'a> {
     }
 }
 
-impl<'a> Matrix<'a, f64> for Vec<Vec<f64>> {
-    type RowVector = Vec<f64>;
-    type ColVector = Vec<f64>;
-    type MatrixSlice = Self;
-    type RowIter = RowIterator<'a>;
-    type ColIter = ColIterator<'a>;
+//impl<'a> Matrix<'a, f64> for Vec<Vec<f64>> {
+//    type RowVector = Vec<f64>;
+//    type ColVector = Vec<f64>;
+//    type MatrixSlice = Self;
+//    type RowIter = RowIterator<'a>;
+//    type ColIter = ColIterator<'a>;
+// 
+//    fn row_len(&self) -> usize {
+//        self.len()
+//    }
+//    
+//    fn col_len(&self) -> usize {
+//        self[0].len()
+//    } 
+//    
+//    fn get(&self, i: usize, j: usize) -> f64 {
+//        self[i][j]
+//    }
+// 
+//    fn row(&self, i: usize) -> Self::RowVector {
+//        self[i].clone()
+//    }
+// 
+//    fn col(&self, j: usize) -> Self::ColVector {
+//        self.iter().map(|x| x[j]).collect()
+//    }
+// 
+//    fn sub_matrix(&'a self, row: Range<usize>, col: Range<usize>) -> Self {
+//        let mut m = vec![ vec![0f64; col.len()]; row.len() ];
+//        for (i, row_i) in row.enumerate() {
+//            for (j, col_j) in col.clone().enumerate() {
+//                m[i][j] = self[row_i][col_j]
+//            }
+//        }
+//        m
+//    }
+// 
+//    fn row_iter(&'a self) -> Self::RowIter {
+//        RowIterator { v: self, row: 0 }
+//    }
+// 
+//    fn col_iter(&'a self) -> Self::ColIter {
+//        ColIterator { v: self, col: 0 }
+//    }
+// 
+//    
+//    //fn as_row_major_vector(&self) -> Self::RowVector {
+//    //    self.iter().flat_map(|x| x.clone().into_iter()).collect()
+//    //}
+//    // 
+//    //fn as_col_major_vector(&self) -> Self::ColVector {
+//    //    let mut m = Vec::new();
+//    //    for i in 0..self.col_len() {
+//    //        for j in 0..self.row_len() {
+//    //            m.push(self[j][i]);
+//    //        }
+//    //    }
+//    //    m
+//    //}
+//}
 
-    fn row_len(&self) -> usize {
-        self.len()
-    }
-    
-    fn col_len(&self) -> usize {
-        self[0].len()
-    } 
-    
-    fn get(&self, i: usize, j: usize) -> f64 {
-        self[i][j]
-    }
 
-    fn row(&self, i: usize) -> Self::RowVector {
-        self[i].clone()
-    }
-
-    fn col(&self, j: usize) -> Self::ColVector {
-        self.iter().map(|x| x[j]).collect()
-    }
-
-    fn sub_matrix(&'a self, row: Range<usize>, col: Range<usize>) -> Self {
-        let mut m = vec![ vec![0f64; col.len()]; row.len() ];
-        for (i, row_i) in row.enumerate() {
-            for (j, col_j) in col.clone().enumerate() {
-                m[i][j] = self[row_i][col_j]
-            }
-        }
-        m
-    }
-
-    fn row_iter(&'a self) -> Self::RowIter {
-        RowIterator { v: self, row: 0 }
-    }
-
-    fn col_iter(&'a self) -> Self::ColIter {
-        ColIterator { v: self, col: 0 }
-    }
-
-    
-    //fn as_row_major_vector(&self) -> Self::RowVector {
-    //    self.iter().flat_map(|x| x.clone().into_iter()).collect()
-    //}
-    // 
-    //fn as_col_major_vector(&self) -> Self::ColVector {
-    //    let mut m = Vec::new();
-    //    for i in 0..self.col_len() {
-    //        for j in 0..self.row_len() {
-    //            m.push(self[j][i]);
-    //        }
-    //    }
-    //    m
-    //}
-}
-
-
-impl<'a> MatrixMut<'a, f64> for Vec<Vec<f64>> {
-    fn set(&mut self, i: usize, j: usize, x: &f64) {
-        self[i][j] = *x
-    }
-
-    fn set_row(&mut self, i: usize, r: &Self::RowVector) {
-        self[i] = r.clone();
-    }
-     
-    fn set_col(&mut self, j: usize, c: &Self::ColVector) {
-        for i in 0..self.len() {
-            self[i][j] = c[i];
-        }
-    }
-    
-    fn set_sub_matrix(&'a mut self, row: Range<usize>, col: Range<usize>, m: &Self) {
-        for (i, row_i) in row.enumerate() {
-            for (j, col_j) in col.clone().enumerate() {
-                self[row_i][col_j] = m[i][j];
-            }
-        }
-    }
-}
+//impl<'a> MatrixMut<'a, f64> for Vec<Vec<f64>> {
+//    fn set(&mut self, i: usize, j: usize, x: &f64) {
+//        self[i][j] = *x
+//    }
+// 
+//    fn set_row(&mut self, i: usize, r: &Self::RowVector) {
+//        self[i] = r.clone();
+//    }
+//     
+//    fn set_col(&mut self, j: usize, c: &Self::ColVector) {
+//        for i in 0..self.len() {
+//            self[i][j] = c[i];
+//        }
+//    }
+//    
+//    fn set_sub_matrix(&'a mut self, row: Range<usize>, col: Range<usize>, m: &Self) {
+//        for (i, row_i) in row.enumerate() {
+//            for (j, col_j) in col.clone().enumerate() {
+//                self[row_i][col_j] = m[i][j];
+//            }
+//        }
+//    }
+//}
 
 pub struct SubRowSlice<'a> {
     m: &'a VecMatrix,
@@ -426,7 +426,7 @@ impl<'a> MatrixMut<'a, f64> for VecMatrix {
 
 impl LinearSpace for VecMatrix {
     fn add(&self, rhs: &Self) -> Self {
-        let mut m = vec![ vec![0f64; self.v.col_len()]; self.v.row_len() ];
+        let mut m = vec![ vec![0f64; self.v[0].len()]; self.v.len() ];
         for i in 0..self.row_len() {
             for j in 0..self.col_len() {
                 m[i][j] = self.v[i][j] + rhs.v[i][j];
@@ -436,7 +436,7 @@ impl LinearSpace for VecMatrix {
     }
     
     fn sub(&self, rhs: &Self) -> Self {
-        let mut m = vec![ vec![0f64; self.v.col_len()]; self.row_len() ];
+        let mut m = vec![ vec![0f64; self.v[0].len()]; self.v.len() ];
         for i in 0..self.row_len() {
             for j in 0..self.col_len() {
                 m[i][j] = self.v[i][j] - rhs.v[i][j];
@@ -450,7 +450,7 @@ impl LinearSpace for VecMatrix {
     }
     
     fn mul(&self, rhs: f64) -> Self {
-        let mut m = vec![ vec![0f64; self.col_len()]; self.v.row_len() ];
+        let mut m = vec![ vec![0f64; self.col_len()]; self.v.len() ];
         for i in 0..self.row_len() {
             for j in 0..self.col_len() {
                 m[i][j] = self.v[i][j] * rhs;
@@ -545,40 +545,25 @@ impl<'a> Matrix<'a,f64> for SubMatrix<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    #[test]
-    fn it_works() {
-        let mut m = vec![ vec![0f64; 10]; 10 ];
-        m.set_sub_matrix(0..2,
-                         0..2,
-                         &vec![vec![11f64,12.],
-                               vec![21f64,22.]]);
-        println!("m is {:?}", m);
-        let sub = m.sub_matrix(0..2,0..2);
-        println!("sub matrix is {:?}", sub);
-
-        let row = m.row(0);
-        println!("row 0 is {:?}", row);
-
-        let col = m.col(0);
-        println!("col 0 is {:?}", col);
-        
-        assert_eq!(1,2);
-    }
-
 
     #[test]
-    fn it_works2() {
+    fn vec_matrix_works2() {
         let m = vec![ vec![0f64, 1.9, 2.0]; 10 ];
         let m = VecMatrix {v: m};
         let m = m.sub_matrix(0..2, 0..2);
-        for row in m.col_iter() {
-            for x in row.iter() {
-                print!("x = {:?}\t", x);
+
+        let mut v = vec![vec![0f64,1.9],
+                     vec![0f64,1.9],];
+
+        let v2 = v.clone();
+        
+        for i in 0..m.row_len() {
+            for j in 0..m.col_len() {
+                v[i][j] = m.get(i,j);
             }
-            println!("");
         }
 
-        assert_eq!(1,2);
+        assert_eq!(v,v2);
     }
 
 }
